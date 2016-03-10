@@ -34,17 +34,20 @@ new_list(M, E, C, A) ->
 
 how_many(Key, List) ->
     try maps:get(Key, List) of
-	{Val, _} ->
-	    Val
+	{Val, Key} ->
+	    io:format("buy ~w ~w~n", [Val, Key]);
+	{Val, Unit} ->
+	    io:format("buy ~w ~w ~w~n", [Val, Unit, Key])
     catch
 	error: {badkey, _} ->
-	    0;
+	    io:format("buy 0 ~w~n", [Key]);
 	error: {badmap, _} ->
-	    0
+	    io:format("buy 0 ~w~n", [Key])
     end.
 
 demo_maps() ->
     Shopping_list = new_list(0.5, 2, 1, 10),
     io:format("~w~n", [Shopping_list]),
-    io:format("buy ~w apples~n", [how_many(apples, Shopping_list)]),
-    io:format("buy ~w oranges~n", [how_many(oranges, Shopping_list)]).
+    how_many(eggs, Shopping_list),
+    how_many(apples, Shopping_list),
+    how_many(oranges, Shopping_list).
