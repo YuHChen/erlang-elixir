@@ -20,7 +20,7 @@ int main() {
   //sending messages from child to parent
   int childToParent[2];
   pipe(childToParent);
-  pid = fork();
+  /*pid = fork();
   if(pid < 0) exit(pid);
   if(pid == 0) {
     printf("Teacher\n");
@@ -36,5 +36,23 @@ int main() {
     printf("Student\n");
     close(parentToChild[0]);
     close(childToParent[1]);
+    }*/
+  pid_t pids[N+1];
+  for(i = 0; i < N+1; i++) {
+    pids[i] = -1;
+  }
+  pid = 0;
+  for(i = 0; i < N+1; i++) {
+    pid = fork();
+    if(!pid) pids[i] = pid;
+    else if(pid < 0) exit(1);
+    else {
+      pids[i] = pid;
+      break;
+    }
+  }
+  //do the thing
+  for(i = 0; i < N+1; i++) {
+    
   }
 }
