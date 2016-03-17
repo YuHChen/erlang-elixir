@@ -6,5 +6,5 @@ echo "git commit -m \"$msg\""
 git commit -m "$msg"
 echo "input name of branch: "
 read branch
-"git push origin $branch"
+echo "git push origin $branch"
 git push origin $branch
