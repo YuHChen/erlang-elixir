@@ -51,6 +51,7 @@ int main() {
     close(childToParent[1]);
     for(i = N; i > 0; i--) {
       snprintf(number, strlen(str1)+strlen(str2)+4, "%s %d %s", str1, i, str2);
+      //printf("%s\n", number);
       write(parentToChild[1], number, strlen(number)+1);
       int nbytes = read(childToParent[0], buf, 4);
       printf("Answer for %d: %s\n", i, buf);
@@ -68,6 +69,7 @@ int main() {
     close(parentToChild[1]);
     close(childToParent[0]);
     int nbytes = read(parentToChild[0], buf, len+1);
+    //printf("Student %d got question: %s\n", index, buf);
     char *num = (char *)calloc(2, sizeof(char));
     snprintf(num, 2, "%c", buf[3]);
     write(childToParent[1], "odd", 4);
