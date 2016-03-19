@@ -1,6 +1,0 @@
-Alex Strong (astrong3)	CS350 f15	Assignment 5
-
-use: once the code is compiled (using make) and the module is inserted, run it with:
-sudo ./user <numConsumers> <numProducers>
-
-By default, the queue will have a capacity of 50 (which can be changed by passing in a module parameter on insert) and each producer will produce 600 strings (which is easily changed via a small edit to user.c - the value of NUM_ITERATIONS). If changing NUM_ITERATIONS, it is recommended to change it to a multiple of 120 (which is 5!) because the professor said he would test it on up to 5 producers/consumers. If not, I can't guarantee it will terminate the first time you run it; it's likely the consumers will block until producers produce more strings. Will test this after I submit.
