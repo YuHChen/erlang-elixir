@@ -44,9 +44,9 @@ int main() {
   char *str2 = "odd?";
   char *over ="class dismissed!";
   int len = strlen(str1)+strlen(str2)+3;
-  char *number = (char *)calloc(len+1, sizeof(char));
   //if it's the parent process, send a message
   if(index == N+1) {
+    char *number = (char *)calloc(len+1, sizeof(char));
     close(parentToChild[0]);
     close(childToParent[1]);
     for(i = N; i > 0; i--) {
@@ -63,6 +63,7 @@ int main() {
     for(i = N; i > 0; i--) {
       write(parentToChild[1], over, strlen(over)+1);
     }
+    free(number);
   }
   //if it's a child process, try to answer the question - but it's dumb so it just answers that everything is odd
   else {
@@ -78,5 +79,6 @@ int main() {
       nbytes = read(parentToChild[0], buf2, strlen(over)+1);
       printf("it\'s finally over!\n");
     }
+    free(num);
   }
 }
