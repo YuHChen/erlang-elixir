@@ -2,9 +2,9 @@
 
 %% setup:
 %% 1) cd
-%% 2) cat super_secret > .erlang.cookie
+%% 2) echo super_secret > .erlang.cookie
 %% 3) chmod 400 .erlang.cookie
-%% 4) erl -sname node_name
+%% 4) erl -sname NODE_NAME@IP
 
 %% compile with c(dist).
 %% run with dist:demo_*().
