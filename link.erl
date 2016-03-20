@@ -2,27 +2,24 @@
 %% run with link:demo_*(*).
 
 -module(link).
--export([demo_link/0, hello/1, world/0, force_exit/2]).
+-export([demo_link/0, hello/2, world/0]).
 
 %% linking processes is simple
 
-hello(World) ->
+hello(2, World) ->
     link(World),
-    io:format("hello~n", []),
-    hello(World).
+    exit(link_demo);
+hello(N, World) ->
+    link(World),
+    io:format("hello ~w~n", [N]),
+    hello(N-1, World).
 
 world() ->
     io:format("world~n", []),
     world().
 
-force_exit(0, Hello) ->
-    exit(Hello, link_demo);
-force_exit(N, Hello) ->
-    force_exit(N-1, Hello).
-
 demo_link() ->
     World = spawn(?MODULE, world, []),
-    Hello = spawn(?MODULE, hello, [World]),
-    spawn(?MODULE, force_exit, [5000, Hello]).
+    spawn(?MODULE, hello, [5, World]).
 
 %% linking allows for fault tolerant supervisor model
