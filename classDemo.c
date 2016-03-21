@@ -20,14 +20,7 @@ int main(int argc, char **argv) {
   pid_t pid;
   int i;
   char buf[MAX_LEN];
-  /*
-  //sending messages from parent to child
-  int parentToChild[2];
-  pipe(parentToChild);
-  //sending messages from child to parent
-  int childToParent[2];
-  pipe(childToParent);
-  */
+  //make a pipe for each student in each direction
   int parentToChild[argc-3][2];
   int childToParent[argc-3][2];
   for(int i = 0; i < argc-3; i++) {
@@ -41,7 +34,7 @@ int main(int argc, char **argv) {
   pids[0] = 0;
   pid = 0;
   int index = 1;
-  //make the N child processes
+  //make a child process for each student
   for(i = 1; i < argc-2; i++) {
     if(pid != 0) break;
     pid = fork();
@@ -57,7 +50,7 @@ int main(int argc, char **argv) {
   char *str2 = "odd?";
   char *over ="class dismissed!";
   int len = strlen(str1)+strlen(str2)+3;
-  //if it's the parent process, send a message
+  //if it's the parent process, send a message, and wait for the student to respond
   if(index == argc-2) {
     char *number = (char *)calloc(len+1, sizeof(char));
     for(int i = 0; i < argc-3; i++) {
@@ -99,9 +92,7 @@ int main(int argc, char **argv) {
       free(num);
     }
     char buf2[strlen(over)+1];
-    //if(index == N) {
     nbytes = read(parentToChild[index-1][0], buf2, strlen(over)+1);
     printf("it\'s finally over!\n");
-    //}
   }
 }
