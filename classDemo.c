@@ -5,11 +5,6 @@
 #include <unistd.h>
 
 #define MAX_LEN 10
-//#define N 4
-
-int isOdd(int n) {
-  return n%2;
-}
 
 int main(int argc, char **argv) {
   if(argc < 4) {
