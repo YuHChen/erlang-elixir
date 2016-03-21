@@ -49,7 +49,7 @@ int main(int argc, char **argv) {
   char *str1 = "Is";
   char *str2 = "odd?";
   char *over ="class dismissed!";
-  int len = strlen(str1)+strlen(str2)+3;
+  int len = strlen(str1)+strlen(str2)+4;
   //if it's the parent process, send a message, and wait for the student to respond
   if(index == argc-2) {
     char *number = (char *)calloc(len+1, sizeof(char));
