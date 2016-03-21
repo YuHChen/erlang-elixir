@@ -73,10 +73,15 @@ int main(int argc, char **argv) {
       snprintf(number, strlen(str1)+strlen(str2)+4, "%s %d %s", str1, i, str2);
       printf("%s, parity of %d?\n", studentNames[(argc-3)-((i-1)%(argc-3)+1)], i);
       write(parentToChild[(argc-3)-((i-1)%(argc-3)+1)][1], number, strlen(number)+1);
-      int nbytes = read(childToParent[(argc-3)-((i-1)%(argc-3)+1)][0], buf, 4);
+      int nbytes = read(childToParent[(argc-3)-((i-1)%(argc-3)+1)][0], buf, 5);
       int isDiff = strcmp(buf, "odd");
       if(!isDiff && i%2) printf("%s: Correct, %d is odd!\n", profName, i);
       else if(!isDiff) printf("%s: Sorry, %d is not odd!\n", profName, i);
+      else {
+        int isDiff2 = strcmp(buf, "even");
+        if(!isDiff2 && i%2) printf("%s: Sorry, %d is not even!\n", profName, i);
+        else if(!isDiff2) printf("%s: Correct, %d is even!\n", profName, i);
+      }
     }
     printf("%s\n", over);
     for(i = 0; i < argc-3; i++) {
